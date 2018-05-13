@@ -76,6 +76,7 @@ export default class Dropdown extends PureComponent {
     ],
 
     useNativeDriver: false,
+    setFontFamily : false,
   };
 
   static propTypes = {
@@ -583,6 +584,7 @@ export default class Dropdown extends PureComponent {
       rippleOpacity,
       rippleDuration,
       shadeOpacity,
+      setFontFamily,
     } = this.props;
 
     let props = propsExtractor(item, index);
@@ -616,8 +618,13 @@ export default class Dropdown extends PureComponent {
           selectedItemColor:
           itemColor:
         selectedItemColor;
+      let fontFamily = 'system font';
+      if(setFontFamily){
+          fontFamily = value;
+      }
 
-    let textStyle = { color, fontSize };
+
+    let textStyle = { color, fontSize, fontFamily };
 
     props.style = [
       style,
@@ -628,7 +635,7 @@ export default class Dropdown extends PureComponent {
       },
     ];
 
-    return (
+      return (
       <DropdownItem index={index} {...props}>
         <Text style={[styles.item, itemTextStyle, textStyle]} numberOfLines={1}>
           {title}
@@ -667,6 +674,7 @@ export default class Dropdown extends PureComponent {
       disabled,
       itemPadding,
       dropdownPosition,
+      fontFamily
     } = props;
 
     let { left, top, width, opacity, selected, modal } = this.state;
